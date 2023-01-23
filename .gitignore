@@ -1,6 +1,8 @@
 terraform.tfstate
+.terraform.tfstate.lock.info
 .terraform.lock.hcl
 /.terraform
 .idea
 /**/node_modules/
 /**/package-lock.json
+terraform.tfstate.backup

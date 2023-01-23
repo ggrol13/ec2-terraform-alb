@@ -16,35 +16,9 @@ provider "aws" {
   region  = "ap-northeast-2"
 }
 
-# resource :: 실제로 생성할 인프라 자원
-resource "aws_instance" "api_server1" {
-  # Amazon Linux2 ami
-  ami           = "ami-035233c9da2fabf52"
-  instance_type = "t2.micro"
-
-  tags = {
-    Name = "TerraformApiServer"
-  }
-}
-
-resource "aws_instance" "api_server2" {
-  # Amazon Linux2 ami
-  ami           = "ami-035233c9da2fabf52"
-  instance_type = "t2.micro"
-
-  tags = {
-    Name = "TerraformApiServer"
-  }
-}
-
-resource "aws_vpc" "DEV-VPC" {
-  assign_generated_ipv6_cidr_block = false
-  cidr_block                       = "10.0.0.0/16"
-  enable_dns_hostnames             = true
-  enable_dns_support               = true
-  instance_tenancy                 = "default"
-  tags = {
-    Name    = "DEV-VPC"
-    Service = "DEV"
-  }
+resource "aws_instance" "ec2_instance" {
+  ami = var.ami_id
+  count = var.number_of_instances
+  instance_type = var.instance_type
+  key_name = var.ami_key_pair_name
 }
